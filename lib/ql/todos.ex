@@ -17,8 +17,11 @@ defmodule Ql.Todos do
       [%List{}, ...]
 
   """
-  def list_lists do
-    Repo.all(List)
+  def list_lists(user_id) do
+    Repo.all(
+      from l in List,
+      where: l.user_id == ^user_id
+    )
   end
 
   @doc """

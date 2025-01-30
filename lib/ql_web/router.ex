@@ -22,13 +22,6 @@ defmodule QlWeb.Router do
 
     get "/", PageController, :home
 
-    live "/lists", ListLive.Index, :index
-    live "/lists/new", ListLive.Index, :new
-    live "/lists/:id/edit", ListLive.Index, :edit
-
-    live "/lists/:id", ListLive.Show, :show
-    live "/lists/:id/show/edit", ListLive.Show, :edit
-
   end
 
   # Other scopes may use custom stacks.
@@ -76,6 +69,13 @@ defmodule QlWeb.Router do
       on_mount: [{QlWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/lists", ListLive.Index, :index
+      live "/lists/new", ListLive.Index, :new
+      live "/lists/:id/edit", ListLive.Index, :edit
+
+      live "/lists/:id", ListLive.Show, :show
+      live "/lists/:id/show/edit", ListLive.Show, :edit
     end
   end
 
