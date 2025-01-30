@@ -6,7 +6,7 @@ defmodule QlWeb.ListLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :lists, Todos.list_lists())}
+    {:ok, stream(socket, :lists, Todos.list_lists(socket.assigns.current_user.id))}
   end
 
   @impl true
