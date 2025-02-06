@@ -1,8 +1,8 @@
 <.header>
-  Listing Lists
+  Min lista
   <:actions>
     <.link patch={~p"/lists/new"}>
-      <.button>New List</.button>
+      <.button>Ny lista</.button>
     </.link>
   </:actions>
 </.header>
@@ -12,20 +12,20 @@
   rows={@streams.lists}
   row_click={fn {_id, list} -> JS.navigate(~p"/lists/#{list}") end}
 >
-  <:col :let={{_id, list}} label="Name">{list.name}</:col>
-  <:col :let={{_id, list}} label="Description">{list.description}</:col>
+  <:col :let={{_id, list}} label="Namn">{list.name}</:col>
+  <:col :let={{_id, list}} label="Beskrivning">{list.description}</:col>
   <:action :let={{_id, list}}>
     <div class="sr-only">
-      <.link navigate={~p"/lists/#{list}"}>Show</.link>
+      <.link navigate={~p"/lists/#{list}"}>Visa</.link>
     </div>
-    <.link patch={~p"/lists/#{list}/edit"}>Edit</.link>
+    <.link patch={~p"/lists/#{list}/edit"}>Ändra</.link>
   </:action>
   <:action :let={{id, list}}>
     <.link
       phx-click={JS.push("delete", value: %{id: list.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Är du säker?"
     >
-      Delete
+      Radera
     </.link>
   </:action>
 </.table>
@@ -38,5 +38,6 @@
     action={@live_action}
     list={@list}
     patch={~p"/lists"}
+    current_user={@current_user}
   />
 </.modal>

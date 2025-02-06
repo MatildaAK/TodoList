@@ -9,7 +9,6 @@ defmodule QlWeb.ListLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage list records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,10 +18,10 @@ defmodule QlWeb.ListLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:name]} type="text" label="Namn" />
+        <.input field={@form[:description]} type="text" label="Beskrivning" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save List</.button>
+          <.button phx-disable-with="Saving...">Spara</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -65,6 +64,9 @@ defmodule QlWeb.ListLive.FormComponent do
   end
 
   defp save_list(socket, :new, list_params) do
+    user_id = socket.assigns.current_user.id
+    list_params = Map.put(list_params, "user_id", user_id)
+
     case Todos.create_list(list_params) do
       {:ok, list} ->
         notify_parent({:saved, list})
